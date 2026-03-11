@@ -1,0 +1,5 @@
+mediapipe==0.10.32
+ultralytics==8.4.21
+opencv-python==4.13.0.92
+protobuf==6.31.1
+tensorflow==2.21.0

@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.whl
+
+# Virtual environments / Conda
+venv/
+env/
+.env
+*.conda
+
+# Model files (large binaries — don't push to GitHub)
+ai_module/models/*.pt
+ai_module/vosk_model/
+
+# Dataset files (too large for GitHub)
+dataset_tools/raw_images/
+dataset_tools/auto_labeled/
+dataset_tools/augmented/
+dataset_tools/split/
+
+# YOLO training output
+blind_locator_training/
+
+# OpenCV temp files
+*.avi
+*.mp4
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
