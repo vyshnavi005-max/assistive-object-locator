@@ -133,31 +133,39 @@ FILLERS = ["the", "my", "a", "an", "me", "please", "for", "is"]
 
 def _clean_and_match(text):
     """
-    Try to match any known object in the text.
-    First tries trigger+object pattern, then falls back to scanning
-    entire text for any known object keyword (more lenient).
+    STRICT sequence matching.
+    You MUST say a trigger word (like 'find' or 'search') before the object.
+    Example: "find my cellphone" or "search for the bottle"
     """
     text = text.lower().strip()
+    
+    if not text:
+        return None
 
-    # --- Strategy 1: Trigger-word pattern (find X) ---
+    # Noise rejection: Reject long rambling sentences
+    if len(text.split()) > 6:
+        return None
+
+    # --- Strategy 1: Trigger-word pattern ONLY ---
     for trigger in TRIGGER_WORDS:
         if trigger in text:
-            after = text.split(trigger, 1)[-1].strip()
+            # Look only at what was said AFTER the trigger word
+            trigger_idx = text.find(trigger)
+            after = text[trigger_idx + len(trigger):].strip()
+            
             # Strip filler words
             for filler in FILLERS:
                 if after.startswith(filler + " "):
                     after = after[len(filler) + 1:].strip()
-            # Match longest key first to avoid "cup" matching "cupcake"
+                    
+            # Match longest key first
             for word in sorted(WORD_TO_CLASS.keys(), key=len, reverse=True):
+                # The object word must exist in the text AT ALL
+                # And it must appear closely AFTER the trigger word
                 if word in after:
                     return WORD_TO_CLASS[word]
 
-    # --- Strategy 2: Scan entire text for object names (no trigger needed) ---
-    # This catches short commands like "bottle" or "phone"
-    for word in sorted(WORD_TO_CLASS.keys(), key=len, reverse=True):
-        if word in text:
-            return WORD_TO_CLASS[word]
-
+    # No Strategy 2 fallback. If no trigger is heard, return None.
     return None
 
 

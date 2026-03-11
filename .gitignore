@@ -46,3 +46,7 @@ desktop.ini
 
 # Logs
 *.log
+
+# Scratch / Temp Agent Files
+diff*.txt
+status*.txt

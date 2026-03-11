@@ -227,7 +227,7 @@ with HandLandmarker.create_from_options(options) as landmarker:
                     cv2.FONT_HERSHEY_SIMPLEX, 0.8, vibe_color, 2)
         cv2.putText(frame, f"TARGET: {TARGET_OBJECT}", (20, 120), 
                     cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-        cv2.putText(frame, "SAY: 'find bottle'  'find cup'  'find phone'", (20, h - 15),
+        cv2.putText(frame, "SAY: 'find bottle' or 'search phone'", (20, h - 15),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.45, (180, 180, 180), 1)
 
         # Show the frame
